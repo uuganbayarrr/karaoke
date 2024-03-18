@@ -159,6 +159,9 @@ if ($result) {
       echo "<h2>Search Results:</h2>";
       while($row = $result->fetch_assoc()) {
           // Calculate the total amount to be paid
+          if($search !=  $row["OrderID"] ){
+
+          
           $allpay = $row["TotalAmount"] + $row["Amount"];
 
           echo "<p><strong>Захиалгын дугаар:</strong> " . $row["OrderID"] .
@@ -167,6 +170,9 @@ if ($result) {
            "<br><strong>Барааны үнэ:</strong> " . $row["Amount"] .
            "<br><strong>Нийт:</strong> " . $allpay .
            "</p>";
+        } else {
+            echo "<h1 style='color : red; background-color : black;'>Tulugdsun tulbur</h1>";
+        }
 ?>
 <form action="" method="post">
     <input type="hidden" name="order_id" value="<?= $row["OrderID"] ?>">
@@ -187,8 +193,6 @@ if ($result) {
   } else {
       echo "Хайсан захиалга алга.";
   }
-} else {
-    echo "Төлбөр төлөгдсөн байна.";
 }
 }
 ?>

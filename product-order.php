@@ -1,26 +1,44 @@
 <?php
 session_start();
 include("dbconnection.php");
-if(isset($_POST['delete_id']) && !empty($_POST['delete_id'])) {
+
+if (isset($_POST['delete_id']) && !empty($_POST['delete_id'])) {
     $delete_id = mysqli_real_escape_string($con, $_POST['delete_id']);
     $quantity = mysqli_real_escape_string($con, $_POST['quan']);
-    $prona = mysqli_real_escape_string($con, $_POST['prona']);
-    $delete_query = "DELETE FROM productlist WHERE ProductListID = $delete_id";
-    if(mysqli_query($con, $delete_query)) {
-        echo "Record deleted successfully.";
-        $query = "UPDATE products SET  Quantity='$quantity' WHERE Name='$prona'";
-        if(mysqli_query($con, $query))
-        {
+    $prona = $_POST['prona']; // No need to escape, as we'll use prepared statements
 
-        }else {
+    // Delete the record from productlist table
+    $delete_query = "DELETE FROM productlist WHERE ProductNames = ?";
 
+    if ($stmt = mysqli_prepare($con, $delete_query)) {
+        mysqli_stmt_bind_param($stmt, "i", $delete_id); // Assuming ProductListID is an integer
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Record deleted successfully.";
+        } else {
+            echo "Error deleting record: " . mysqli_error($con);
         }
-
+        mysqli_stmt_close($stmt);
     } else {
-        echo "Error deleting record: " . mysqli_error($con);
+        echo "Error preparing delete statement: " . mysqli_error($con);
+    }
+
+    // Update the quantity in products table
+    $update_query = "UPDATE products SET Quantity = ? WHERE Name = ?";
+
+    if ($stmt = mysqli_prepare($con, $update_query)) {
+        mysqli_stmt_bind_param($stmt, "is", $quantity, $prona);
+        if (mysqli_stmt_execute($stmt)) {
+            // You can perform further actions if needed
+        } else {
+            echo "Error updating quantity: " . mysqli_error($con);
+        }
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Error preparing update statement: " . mysqli_error($con);
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -15,10 +15,15 @@ if(isset($_POST['update'])) {
         if($fetch_result && mysqli_num_rows($fetch_result) > 0) {
             $row = mysqli_fetch_assoc($fetch_result);
             $price = $row['Price'];
-
-
+            $ret1 = mysqli_query($con, "SELECT * FROM products WHERE ProductID = '$proid'");
+            while ($row = mysqli_fetch_array($ret1)) {
+                $rq = $row['Quantity'];
+                $rq = $rq - $quantity;
+                $query = "UPDATE products SET Quantity='$rq' WHERE ProductID ='$proid'";
+                mysqli_query($con, $query);
+            }    
             $amount = $quantity * $price;
-            $query = "UPDATE productlist SET Room='$room', Quantity='$quantity', Amount='$amount' WHERE ProductListID='$id'";
+            $query = "UPDATE productlist SET  Quantity='$quantity', Amount='$amount' WHERE ProductListID='$id'";
             $ret = mysqli_query($con, $query);
             if($ret) {
                 echo "<script>alert('Data Updated');</script>";

@@ -232,36 +232,46 @@ include("dbconnection.php");
                                     </div>
                                     <div class="grid-body no-border">
 
-                                            <table class="table table-hover no-more-tables" id="dataTable1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Төлбөр дугаар</th>
-                                                        <th>Захиалга дугаар</th>
-                                                        <th>Үнэ</th>
-                                                        <th>Огноо</th>
-                                                        <th>Төлөв</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php $ret=mysqli_query($con,"select * from payment");
-												$cnt=1;
-												while($row=mysqli_fetch_array($ret))
-												{
-													$_SESSION['ids']=$row['PaymentID'];
-												?>
-                                                    <tr>
+                                    <table class="table table-hover no-more-tables" id="dataTable1">
+    <thead>
+        <tr>
+            <th>Төлбөр дугаар</th>
+            <th>Захиалга дугаар</th>
+            <th>Үнэ</th>
+            <th>Огноо</th>
+            <th>Төлөв</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php 
+        $ret = mysqli_query($con, "select * from payment");
+        $cnt = 1;
+        while($row = mysqli_fetch_array($ret)) {
+            $_SESSION['ids'] = $row['PaymentID'];
+    ?>
+        <tr>
+            <td><?php echo $row['PaymentID'];?></td>
+            <td><?php echo $row['OrderID'];?></td>
+            <td><?php echo $row['Amount'];?></td>
+            <td><?php echo $row['PaymentDate'];?></td>
+            <td><?php echo $row['Status'];?></td>
+        </tr>
+    <?php  } ?>
+    </tbody>
+</table>
+<button id="exportButton1">Тайлан гаргах</button>
 
-                                                        <td><?php echo $row['PaymentID'];?></td>
-                                                        <td><?php echo $row['OrderID'];?></td>
-                                                        <td><?php echo $row['Amount'];?></td>
-                                                          <td><?php echo $row['PaymentDate'];?></td>
-                                                          <td><?php echo $row['Status'];?></td>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+<script>
+    document.getElementById('exportButton1').addEventListener('click', function () {
+        var table = document.getElementById('dataTable1');
+        var sheet = XLSX.utils.table_to_sheet(table);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, sheet, 'Sheet1');
+        XLSX.writeFile(wb, 'tulbur.xlsx');
+    });
+</script>
 
-                                                    </tr>
-                                                    <?php  } ?>
-                                                </tbody>
-                                            </table>
-                                            <button id="exportButton1">Хэвлэх</button>
 
                                     </div>
                                 </div>
@@ -336,20 +346,6 @@ include("dbconnection.php");
 
             downloadLink.href = 'data:application/vnd.ms-excel,' + html;
             downloadLink.download = 'reportorder.xls';
-            downloadLink.click();
-        });
-    </script>
-    <script>
-        document.getElementById('exportButton1').addEventListener('click', function () {
-            var table = document.getElementById('dataTable1');
-            var html = table.outerHTML.replace(/ /g, '%20');
-
-            // Generate download link
-            var downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-
-            downloadLink.href = 'data:application/vnd.ms-excel,' + html;
-            downloadLink.download = 'reportpayment.xls';
             downloadLink.click();
         });
     </script>

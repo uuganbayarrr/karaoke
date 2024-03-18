@@ -129,8 +129,21 @@ include("dbconnection.php");
                                                 </tbody>
                                             </table>
 
+                                            <button id="exportButton">Тайлан гаргах</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+<script>
+    document.getElementById('exportButton').addEventListener('click', function () {
+        var table = document.getElementById('dataTable');
+        var sheet = XLSX.utils.table_to_sheet(table);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, sheet, 'Sheet1');
+        XLSX.writeFile(wb, 'workers.xlsx');
+    });
+</script>
+
                                     </div>
-                    </div>    <button id="exportButton">Хэвлэх</button>
+                    </div>  
 
                                 </div>
                             </div>
@@ -159,21 +172,7 @@ include("dbconnection.php");
 <script src="../assets/plugins/jquery-sparkline/jquery-sparkline.js"></script>
 <script src="../assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
-<script>
-	//Too Small for new file - Helps the to tick all options in the table
-	$('table .checkbox input').click( function() {
-		if($(this).is(':checked')){
-			$(this).parent().parent().parent().toggleClass('row_selected');
-		}
-		else{
-		$(this).parent().parent().parent().toggleClass('row_selected');
-		}
-	});
-	// Demo charts - not required
-	$('.customer-sparkline').each(function () {
-		$(this).sparkline('html', { type:$(this).attr("data-sparkline-type"), barColor:$(this).attr("data-sparkline-color") , enableTagOptions: true  });
-	});
-</script>
+
 <!-- BEGIN CORE TEMPLATE JS -->
 <script src="../assets/js/core.js" type="text/javascript"></script>
 <script src="../assets/js/chat.js" type="text/javascript"></script>

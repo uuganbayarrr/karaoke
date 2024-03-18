@@ -84,7 +84,7 @@ include("dbconnection.php"); // Include database connection script
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php $ret=mysqli_query($con,"select * from orders where type!=2");
+                                                <?php $ret=mysqli_query($con,"select * from orders where type=0");
 												$cnt=1;
 												while($row=mysqli_fetch_array($ret))
 												{
