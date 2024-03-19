@@ -178,7 +178,7 @@ padding-left:15px;
                             </div>
                         </div>
                     </div>
-                    <!-- <button id="exportButton">Тайлан гаргах</button> -->
+                    <button id="exportButton">Тайлан гаргах</button>
 
 					</div>
                 </div>

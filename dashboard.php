@@ -251,20 +251,21 @@ if($row["type"]==0)
 <script src="assets/js/core.js" type="text/javascript"></script>
 <script src="assets/js/chat.js" type="text/javascript"></script>
 <script src="assets/js/demo.js" type="text/javascript"></script>
-  <script>
-        document.getElementById('exportButton').addEventListener('click', function () {
-            var table = document.getElementById('dataTable');
-            var html = table.outerHTML.replace(/ /g, '%20');
-
-            // Generate download link
-            var downloadLink = document.createElement("a");
-            document.body.appendChild(downloadLink);
-
-            downloadLink.href = 'data:application/vnd.ms-excel,' + html;
-            downloadLink.download = 'table.xls';
-            downloadLink.click();
-        });
-    </script>
+<script>
+	//Too Small for new file - Helps the to tick all options in the table
+	$('table .checkbox input').click( function() {
+		if($(this).is(':checked')){
+			$(this).parent().parent().parent().toggleClass('row_selected');
+		}
+		else{
+		$(this).parent().parent().parent().toggleClass('row_selected');
+		}
+	});
+	// Demo charts - not required
+	$('.customer-sparkline').each(function () {
+		$(this).sparkline('html', { type:$(this).attr("data-sparkline-type"), barColor:$(this).attr("data-sparkline-color") , enableTagOptions: true  });
+	});
+</script>
 <!-- END CORE TEMPLATE JS -->
 </body>
 </html>

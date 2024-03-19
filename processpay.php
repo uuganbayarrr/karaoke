@@ -170,9 +170,10 @@ if ($result) {
            "<br><strong>Барааны үнэ:</strong> " . $row["Amount"] .
            "<br><strong>Нийт:</strong> " . $allpay .
            "</p>";
-        } else {
-            echo "<h1 style='color : red; background-color : black;'>Tulugdsun tulbur</h1>";
-        }
+        } 
+        // else {
+        //     echo "<h1 style='color : red; background-color : black;'>Tulugdsun tulbur</h1>";
+        // }
 ?>
 <form action="" method="post">
     <input type="hidden" name="order_id" value="<?= $row["OrderID"] ?>">
