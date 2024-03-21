@@ -106,12 +106,12 @@ include("dbconnection.php");
                                             </table>
 
                                     </div>   
-                                     <!-- <?php
+                                     <?php
                                      if($_SESSION['Roll'] == 'reseption'){ ?>
                                     <?php } else {?>
                                       <button id="exportButton">Тайлан гаргах</button>
                                       
-                                    <?php } ?> -->
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

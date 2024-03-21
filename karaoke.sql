@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2024 at 04:31 PM
+-- Generation Time: Mar 21, 2024 at 10:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,9 +45,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`OrderID`, `WorkerName`, `userphone`, `RoomNumber`, `ServiceName`, `OrderDate`, `Qua`, `time`, `TotalAmount`, `type`) VALUES
-(114, 'ajiltan1', 0, 1, 'karaoke', '2024-03-14 09:39:56', 200, 2, 20400, 2),
-(115, 'ajiltan1', 2147483647, 1, 'karaoke', '2024-03-09 16:00:00', 200, 1, 20200, 1),
-(116, 'ajiltan1', 0, 1, 'karaoke', '2024-03-15 08:30:50', 200, 2, 20400, 2);
+(171, 'ajiltan1', 0, 1, 'karaoke\r\n', '2024-03-21 02:25:10', 100, 4, 15400, 2);
 
 -- --------------------------------------------------------
 
@@ -69,8 +67,7 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`PaymentID`, `OrderID`, `WorkerName`, `Amount`, `PaymentDate`, `Status`) VALUES
-(49, 114, 'ajiltan1', 23900, '2024-03-15 15:30:29', 'Амжилттай'),
-(50, 116, 'ajiltan1', 23900, '2024-03-15 15:31:29', 'Амжилттай');
+(65, 171, 'ajiltan1', 38400, '2024-03-21 09:26:05', 'Амжилттай');
 
 -- --------------------------------------------------------
 
@@ -93,8 +90,8 @@ CREATE TABLE `productlist` (
 --
 
 INSERT INTO `productlist` (`ProductListID`, `OrderID`, `ProductNames`, `WorkerName`, `ProductDate`, `Quantity`, `Amount`) VALUES
-(72, 114, 'Сэнгүүр', 'ajiltan1', '00:40:21', 1, '3500'),
-(73, 116, 'Сэнгүүр', 'ajiltan1', '23:31:09', 1, '3500');
+(84, 171, 'Сэнгүүр', 'ajiltan1', '17:25:30', 1, '3500'),
+(85, 171, 'Бориго', 'ajiltan1', '17:25:41', 3, '19500');
 
 -- --------------------------------------------------------
 
@@ -114,8 +111,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ProductID`, `Name`, `Price`, `Quantity`) VALUES
-(2, 'Сэнгүүр', 3500.00, 96),
-(3, 'Бориго', 6500.00, 10);
+(2, 'Сэнгүүр', 3500.00, 1),
+(3, 'Бориго', 6500.00, 97),
+(4, 'Eden 1L', 28000.00, 9);
 
 -- --------------------------------------------------------
 
@@ -138,7 +136,8 @@ CREATE TABLE `room` (
 
 INSERT INTO `room` (`RoomID`, `RoomNumber`, `Capacity`, `RoomPrice`, `RoomType`, `Status`) VALUES
 (6, '1', 11, 100, 'Энгийн', 1),
-(8, '2', 4, 200, 'Goy', 1);
+(8, '2', 4, 200, 'Goy', 1),
+(9, '4', 4, 2500, 'Энгийн', 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +156,9 @@ CREATE TABLE `service` (
 --
 
 INSERT INTO `service` (`ServiceID`, `Description`, `Price`) VALUES
-(2, 'karaoke\r\n', 20000.00);
+(2, 'karaoke\r\n', 15000.00),
+(3, 'Tursun udur\r\n', 5000.00),
+(4, 'aa\r\n', 35000.00);
 
 -- --------------------------------------------------------
 
@@ -239,37 +240,37 @@ ALTER TABLE `worker`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `productlist`
 --
 ALTER TABLE `productlist`
-  MODIFY `ProductListID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `ProductListID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `RoomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `RoomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `ServiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ServiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `worker`

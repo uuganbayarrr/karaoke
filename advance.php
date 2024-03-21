@@ -25,6 +25,8 @@ if(isset($_POST['delete_id']) && !empty($_POST['delete_id'])) {
 }
 // Check if pay_success is set and not empty
 if(isset($_POST['come']) && !empty($_POST['come'])) {
+    $room = mysqli_real_escape_string($con, $_POST['room']);
+
       $come = mysqli_real_escape_string($con, $_POST['come']);
       // Insert query
         $status_query = "UPDATE orders  SET type = 0 WHERE OrderID = $come";
@@ -154,6 +156,8 @@ if(isset($_POST['come']) && !empty($_POST['come'])) {
                                                         <td>
                                                         <form name="abc" action="" method="post">
          <input type="hidden" name="come" value="<?php echo $row['OrderID']; ?>"/>
+        <input type="hidden" name="room" value="<?php echo $row['RoomNumber']; ?>"/>
+
         <button type="submit" class="btn btn-success btn-xs btn-mini">&nbsp;Ирсэн&nbsp;&nbsp;</button>
         </form>
     <form name="abc" action="" method="post">

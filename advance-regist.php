@@ -12,15 +12,16 @@ if(isset($_POST['update'])) {
 
     $type = 1; 
     
-    $query_service = "SELECT Price FROM service WHERE ServiceID = ?";
+    $query_service = "SELECT ServiceID, Price FROM service WHERE ServiceID = ?";
     $stmt_service = mysqli_prepare($con, $query_service);
     mysqli_stmt_bind_param($stmt_service, "s", $service);
     mysqli_stmt_execute($stmt_service);
-    mysqli_stmt_bind_result($stmt_service, $service_name, $service_price);
+    mysqli_stmt_bind_result($stmt_service, $service_id, $service_price);
     mysqli_stmt_fetch($stmt_service);
     mysqli_stmt_close($stmt_service);
+    
 
-    // Fetch room price
+
     $query_room = "SELECT RoomPrice FROM room WHERE RoomNumber = ?";
     $stmt_room = mysqli_prepare($con, $query_room);
     mysqli_stmt_bind_param($stmt_room, "s", $room);
@@ -47,9 +48,6 @@ if(isset($_POST['update'])) {
     mysqli_stmt_close($stmt);
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html>

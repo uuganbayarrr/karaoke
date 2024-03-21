@@ -154,12 +154,10 @@ if ($result) {
   // Execute the SQL statement
   $result = $con->query($sql);
 
-  // Display the search results
   if ($result->num_rows > 0) {
-      echo "<h2>Search Results:</h2>";
+      echo "<h2>Хайлт:</h2>";
       while($row = $result->fetch_assoc()) {
-          // Calculate the total amount to be paid
-          if($search !=  $row["OrderID"] ){
+      
 
           
           $allpay = $row["TotalAmount"] + $row["Amount"];
@@ -170,7 +168,7 @@ if ($result) {
            "<br><strong>Барааны үнэ:</strong> " . $row["Amount"] .
            "<br><strong>Нийт:</strong> " . $allpay .
            "</p>";
-        } 
+        
         // else {
         //     echo "<h1 style='color : red; background-color : black;'>Tulugdsun tulbur</h1>";
         // }

@@ -121,7 +121,7 @@ include("dbconnection.php"); // Include database connection script
                                                 </tbody>
                                             </table>
                                     </div>
-    <!-- <button id="exportButton">Тайлан гаргах</button> -->
+    <button id="exportButton">Тайлан гаргах</button>
 
                                 </div>
                             </div>
